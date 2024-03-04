@@ -1,26 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { body, btnLayout, btnStyle, inputstyle, opStyle, subBody } from './ConstStylefile'
 const btns = ['+', '7', '8', '9', '-', '4', '5', '6', '*', '1', '2', '3', '/', '0', '.', '=', 'C'];
 const operators = ['+', '-', '*', '/', 'C'];
 
 function Calculator() {
-    const inputRef=useRef(null);
-    const [isInputFocused,SetIsInputFocused]=useState(false);
     const [display, setDisplay] = useState('');
     useEffect(()=>{
         document.title="Calculator App"
     },[]);
-    useEffect(()=>{
-        document.body.addEventListener('click',focusClick);
-        return ()=>{
-            document.body.removeEventListener('click',focusClick);
-        }
-    })
-    function focusClick(){
-        if(!isInputFocused){
-            inputRef.current.focus();
-        }
-    }
     function result() {
         try {
             //eslint-disable-next-line
@@ -40,9 +27,7 @@ function Calculator() {
                     style={{ color: 'hsl(35, 100%, 55%)', textAlign: 'center', fontFamily: 'sans-serif', letterSpacing: '15px', fontWeight: 'bold' }}>
                     Calculator
                 </h1>
-                <input type='text' ref={inputRef} value={display} readOnly style={inputstyle} id='display'
-                    onFocus={()=>SetIsInputFocused(true)}
-                    onBlur={()=>SetIsInputFocused(false)}
+                <input type='text'  value={display} readOnly style={inputstyle} id='display' autoFocus = {true}
                     onKeyDown={(event) => {
                         if (event.key === '=' || event.key === 'Enter')
                             result();
