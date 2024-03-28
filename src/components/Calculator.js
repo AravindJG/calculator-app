@@ -99,4 +99,4 @@ export default Calculator
 //     fontSize: '3rem',
 //     fontWeight: 'bold',
 //     cursor: 'pointer',
-// }
+// }  commad prompt checked
