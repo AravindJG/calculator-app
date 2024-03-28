@@ -27,27 +27,27 @@ function Calculator() {
                     style={{ color: 'hsl(35, 100%, 55%)', textAlign: 'center', fontFamily: 'sans-serif', letterSpacing: '15px', fontWeight: 'bold' }}>
                     Calculator
                 </h1>
-                <input type='text'  value={display} readOnly style={inputstyle} id='display' autoFocus = {true}
-                    onKeyDown={(event) => {
-                        if (event.key === '=' || event.key === 'Enter')
+                <input type='text'  value={display} readOnly style={inputstyle} id='display' autoFocus
+                    onKeyDown={(e) => {
+                        if (e.key === '=' || e.key === 'Enter')
                             result();
-                        else if (event.key === 'C' || event.key === 'Backspace')
+                        else if (e.key === 'C' || e.key === 'Backspace')
                             clearSc();
-                        else if (btns.includes(event.key))
-                            setDisplay(display + event.key);
+                        else if (btns.includes(e.key))
+                            setDisplay(d => (d + e.key));
                     }}>
                 </input>
                 <div style={btnLayout}>
                     {btns.map((element, index) => {
                         if (element === 'C') {
-                            return <button key={index} onClick={clearSc} style={(operators.includes(element)) ? opStyle : btnStyle}>{element}</button>
+                            return <button key={index} onClick={clearSc} style={opStyle}>{element}</button>
                         }
                         else if (element === '=') {
                             return <button key={index} onClick={result} style={btnStyle}>{element}</button>
                         }
                         else {
                             return <button key={index} onClick={() => {
-                                setDisplay(display + element);
+                                setDisplay(d => (d + element));
                             }} style={(operators.includes(element)) ? opStyle : btnStyle}>{element}</button>
                         }
                     })}
